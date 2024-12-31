@@ -1870,8 +1870,12 @@ def plotEvalIterationsComparisonFINAL(runs:List[RunDict], rdir:str, title:bool=F
         name, key, tree, id = EXPERIMENT.run(run)
         root                = EXPERIMENT.map(run["tree"]["root"])
 
-        if "LEMON" in name or "RAND" in name:
+        if "RAND" in name:
             id = f"{name}-{root}"
+
+        if "LEMON" in name:
+            id = f"{name}-{root}"
+            print(f"{id} -- Converged: {utils.rnd(run['timers']['convergence'], 4)}sec")
 
         id = re.sub(r'\b[hH]euristic\b', lambda m: 'Weighted' if m.group(0)[0].isupper() else 'weighted', id)
         id = str(id)
